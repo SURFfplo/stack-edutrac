@@ -1,0 +1,71 @@
+version: '3.7'
+
+services:
+  db:
+    #image: mysql:5.7 
+    image: 192.87.106.18:56001/mysql:0.1
+    secrets:
+      - edutrac_db_root_password
+      - edutrac_db_dba_password
+    deploy:
+      replicas: 1
+      placement:
+        constraints: [node.role == manager]
+      resources:
+        reservations:
+          memory: 128M
+        limits:
+          memory: 256M
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_USER: dba
+      MYSQL_DATABASE: sis 
+      MYSQL_ROOT_PASSWORD_FILE: /run/secrets/edutrac_db_root_password
+      MYSQL_PASSWORD_FILE: /run/secrets/edutrac_db_dba_password
+    networks:
+      - dev-net
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      #- .data/mysql:/var/lib/mysql
+      - /mnt/nfs/nfsdlo/$STACK_NETWORK/sis-0.1/data/mysql:/var/lib/mysql
+
+    configs:
+      - source: my_cnf
+        target: /etc/mysql/conf.d/my.cnf
+
+  etsis: 
+    #image: edutrac-sis 
+    image: 192.87.106.18:56001/edutrac-sis:0.1
+    deploy:
+      replicas: 1
+    secrets:
+      - edutrac_db_root_password
+      - edutrac_db_dba_password
+    environment:
+      DB_HOST: 'db'
+      DB_USER: 'dba'
+      DB_NAME: 'sis'
+      DB_PASS_FILE: /run/secrets/edutrac_db_dba_password
+      DB_PORT: 3306
+    networks:
+      - dev-net
+    volumes:
+      #- /var/docker/image-edutrac-sis/public_html/:/var/www/html/
+      - /mnt/nfs/nfsdlo/$STACK_NETWORK/sis-0.1/html:/var/www/html/
+    ports:
+      - 57101:80
+
+secrets:
+  edutrac_db_root_password:
+    external: true
+  edutrac_db_dba_password:
+    external: true
+
+configs:
+  my_cnf:
+    external: true
+
+networks:
+  dev-net:
+    external: true
