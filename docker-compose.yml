@@ -53,6 +53,7 @@ services:
     volumes:
       #- /var/docker/image-edutrac-sis/public_html/:/var/www/html/
       - /mnt/nfs/nfsdlo/$STACK_NETWORK/sis-0.1/html:/var/www/html/
+      - /mnt/nfs/nfsdlo/$STACK_NETWORK/sis-0.1/conf:/var/www/conf/
     ports:
       - 57101:80
 
