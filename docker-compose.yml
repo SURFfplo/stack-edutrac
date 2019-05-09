@@ -43,7 +43,7 @@ services:
       - edutrac_db_root_password
       - edutrac_db_dba_password
     environment:
-      DB_HOST: 'db'
+      DB_HOST: '192.87.106.21'
       DB_USER: 'dba'
       DB_NAME: 'sis'
       DB_PASS_FILE: /run/secrets/edutrac_db_dba_password
