@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Initialize etis container
-cd /var/www/html
+cd /data
 cp htaccess.txt .htaccess
 chmod 755 config.php
 chmod 755 phinx.php
