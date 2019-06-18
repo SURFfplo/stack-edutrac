@@ -47,8 +47,6 @@ services:
       MYSQL_PASSWORD_FILE: /run/secrets/edutrac_db_dba_password
     networks:
       - $STACK_NETWORK
-    ports:
-      - 3306:3306
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       #- .data/mysql:/var/lib/mysql
