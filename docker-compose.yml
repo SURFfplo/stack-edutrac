@@ -23,6 +23,7 @@ services:
       #- /var/docker/image-edutrac-sis/public_html/:/var/www/html/
       - /mnt/nfs/nfsdlo/$STACK_NETWORK/$STACK_SERVICE/$STACK_VERSION/html:/var/www/html/
       - /mnt/nfs/nfsdlo/$STACK_NETWORK/$STACK_SERVICE/$STACK_VERSION/conf:/var/www/conf/
+      - $PWD/startup.sh:/startup.sh
 
   db:
     #image: mysql:5.7 
@@ -56,28 +57,6 @@ services:
     configs:
       - source: my_cnf
         target: /etc/mysql/conf.d/my.cnf
-
-  startup:
-    #image: alpine:0.1
-    image: 192.87.106.18:56001/alpine:0.1
-    deploy:
-      replicas: 1
-      restart_policy:
-        condition: none
-    secrets:
-      - edutrac_db_dba_password
-    networks:
-      - $STACK_NETWORK
-    environment:
-      DB_HOST: ${STACK_SERVICE}_db
-      DB_USER: 'dba'
-      DB_NAME: 'sis'
-      DB_PASS_FILE: /run/secrets/edutrac_db_dba_password
-      DB_PORT: 3306
-    volumes:
-      #- $PWD/src/$STACK_SERVICE:/app
-      - /mnt/nfs/nfsdlo/$STACK_NETWORK/$STACK_SERVICE/$STACK_VERSION/html:/data
-      - $PWD/startup.sh:/startup.sh
 
 secrets:
   edutrac_db_root_password:

@@ -1,10 +1,10 @@
-#!/bin/sh
+#!/bin/bash
 
 # Initialize etis container
-cd /data
+cd /var/www/html
 cp htaccess.txt .htaccess
 chmod 755 config.php
 chmod 755 phinx.php
-#chown -R apache:apache *
-#./etsis core migrate
+chown -R apache:apache *
+./etsis core migrate
 

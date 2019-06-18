@@ -17,3 +17,4 @@ mv $STACK_REPOSITORY $STACK_SERVICE
 cd ..
 
 # config
+cp config_edutrac/ssl.php src/$STACK_SERVICE/app/dropins
