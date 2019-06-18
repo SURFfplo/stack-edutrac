@@ -1,8 +1,10 @@
 #!/bin/bash
 
-
 # to the correct dir
+mkdir -p src
 cd src
+
+# remove old version if it exists...
 rm -rf $STACK_SERVICE
 
 # get code
