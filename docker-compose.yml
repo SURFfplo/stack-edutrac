@@ -23,7 +23,7 @@ services:
       #- /var/docker/image-edutrac-sis/public_html/:/var/www/html/
       - /mnt/nfs/nfsdlo/$STACK_NETWORK/$STACK_SERVICE/$STACK_VERSION/html:/var/www/html/
       - /mnt/nfs/nfsdlo/$STACK_NETWORK/$STACK_SERVICE/$STACK_VERSION/conf:/var/www/conf/
-      - $PWD/startup.sh:/startup.sh
+      - /mnt/nfs/nfsdlo/$STACK_NETWORK/$STACK_SERVICE/$STACK_VERSION/tmp/startup.sh:/startup.sh
 
   db:
     #image: mysql:5.7 
