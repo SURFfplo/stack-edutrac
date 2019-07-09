@@ -5,7 +5,14 @@ services:
     #image: edutrac-sis 
     image: 192.87.106.18:56001/edutrac:0.1
     deploy:
+      mode: replicated
       replicas: 1
+      resources:
+        limits:
+          cpu: '1.0'
+          memory: 256M
+      restart_policy:
+        condition: any
     secrets:
       - edutrac_db_root_password
       - edutrac_db_dba_password
@@ -32,14 +39,16 @@ services:
       - edutrac_db_root_password
       - edutrac_db_dba_password
     deploy:
+      mode: replicated
       replicas: 1
+      resources:
+        limits:
+          cpu: '1.0'
+          memory: 512M
+      restart_policy:
+        condition: any
       placement:
         constraints: [node.role == manager]
-      resources:
-        reservations:
-          memory: 128M
-        limits:
-          memory: 256M
     environment:
       MYSQL_USER: dba
       MYSQL_DATABASE: sis 
