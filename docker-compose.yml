@@ -38,18 +38,18 @@ services:
     secrets:
       - edutrac_db_root_password
       - edutrac_db_dba_password
-    deploy:
-      mode: replicated
-      replicas: 1
-      resources:
-        limits:
-          cpus: '1.0'
-          memory: 512M
-      restart_policy:
-        condition: any
-        delay: 60s
-      placement:
-        constraints: [node.role == manager]
+#    deploy:
+#      mode: replicated
+#      replicas: 1
+#      resources:
+#        limits:
+#          cpus: '1.0'
+#          memory: 512M
+#      restart_policy:
+#        condition: any
+#        delay: 60s
+#      placement:
+#        constraints: [node.role == manager]
     environment:
       MYSQL_USER: dba
       MYSQL_DATABASE: sis 
