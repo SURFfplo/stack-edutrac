@@ -47,6 +47,7 @@ services:
           memory: 512M
       restart_policy:
         condition: any
+	delay: 60s
       placement:
         constraints: [node.role == manager]
     environment:
