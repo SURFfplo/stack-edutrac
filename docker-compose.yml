@@ -50,7 +50,7 @@ services:
         delay: 60s
       placement:
         constraints:
-          - node.labels.database
+          - node.labels.database == ""
     environment:
       MYSQL_USER: dba
       MYSQL_DATABASE: sis 
