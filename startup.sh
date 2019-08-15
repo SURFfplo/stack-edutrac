@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# sleep
+sleep 120
+
 # Initialize etis container
 cd /var/www/html
 cp htaccess.txt .htaccess
